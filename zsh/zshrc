@@ -1,0 +1,58 @@
+# If you come from bash you might have to change your $PATH.
+export PATH=$HOME/.bin:/usr/local/bin:$PATH
+
+# Path to your oh-my-zsh installation.
+export ZSH="$HOME/.oh-my-zsh"
+
+# Set name of the theme to load --- if set to "random", it will
+# load a random theme each time oh-my-zsh is loaded, in which case,
+# to know which specific one was loaded, run: echo $RANDOM_THEME
+# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
+ZSH_THEME="robbyrussell"
+
+# Install powerlevel9k theme
+source /usr/local/opt/powerlevel9k/powerlevel9k.zsh-theme
+# Configure powerlevel9k theme
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(os_icon dir dir_writable vcs)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status command_execution_time root_indicator background_jobs node_version)
+POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
+POWERLEVEL9K_COMMAND_EXECUTION_TIME_THRESHOLD=10
+POWERLEVEL9K_COMMAND_EXECUTION_TIME_PRECISION=2
+POWERLEVEL9K_MODE="nerdfont-complete"
+OS_ICON="\uF302"
+
+# Setup almostontop plugin
+source $HOME/.oh-my-zsh/custom/plugins/almostontop/almostontop.plugin.zsh
+
+# Which plugins would you like to load?
+# Standard plugins can be found in ~/.oh-my-zsh/plugins/*
+# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
+# Example format: plugins=(rails git textmate ruby lighthouse)
+# Add wisely, as too many plugins slow down shell startup.
+plugins=(
+  git
+  zsh-syntax-highlighting
+  zsh-autosuggestions
+  notify
+)
+
+# Notify plugin setup
+zstyle ':notify:*' command-complete-timeout 15
+zstyle ':notify:*' error-title "Sir, I'm afraid there has been a problem."
+zstyle ':notify:*' success-title "As always sir, it works."
+zstyle ':notify:*' error-icon "$HOME/.oh-my-zsh/custom/plugins/notify/failure.png"
+zstyle ':notify:*' success-icon "$HOME/.oh-my-zsh/custom/plugins/notify/success.png"
+zstyle ':notify:*' activate-terminal no
+
+# Setup locale
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+
+export TERM="xterm-256color"
+
+# Load Oh my ZSH
+source $ZSH/oh-my-zsh.sh
+
+# Disable Homebrew analytics
+export HOMEBREW_NO_ANALYTICS=1
+

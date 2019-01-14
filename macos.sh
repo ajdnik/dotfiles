@@ -17,38 +17,6 @@ EXECUTE_COMMANDS=false
 
 print_header "HARDENING OPERATING SYSTEM"
 
-print_step "Generate entropy for FileVault and randomness. Keep typing random things and press Control-D in a new line to exit."
-print_command "cat > /dev/random"
-start_command_output
-[ "$EXECUTE_COMMANDS" = true ] && cat > /dev/random || echo "EXECUTE_COMMANDS is set to false."
-end_command_output
-
-print_step "Changing computer name."
-# Generate new computer name 
-RANDOM_HEX=$(hexdump -n 4 -e '4/4 "%08X" 1 "\n"' /dev/urandom)
-COMPUTER_NAME="Unknown${RANDOM_HEX}"
-
-print_command "sudo scutil --set ComputerName ${COMPUTER_NAME}"
-start_command_output
-[ "$EXECUTE_COMMANDS" = true ] && sudo scutil --set ComputerName $COMPUTER_NAME || echo "EXECUTE_COMMANDS is set to false."
-end_command_output
-print_command "sudo scutil --set LocalHostName ${COMPUTER_NAME}"
-start_command_output
-[ "$EXECUTE_COMMANDS" = true ] && sudo scutil --set LocalHostName $COMPUTER_NAME || echo "EXECUTE_COMMANDS is set to false."
-end_command_output
-
-print_step "Enable FileVault."
-print_command "sudo fdesetup enable"
-start_command_output
-[ "$EXECUTE_COMMANDS" = true ] && sudo fdesetup enable || echo "EXECUTE_COMMANDS is set to false."
-end_command_output
-
-print_step "Secure FileVault keys when sleeping."
-print_command "sudo sh -c 'pmset -a destroyfvkeyonstandby 1; pmset -a hibernatemode 25; pmset -a powernap 0; pmset -a standby 0; pmset -a standbydelay 0; pmset -a autopoweroff 0'"
-start_command_output
-[ "$EXECUTE_COMMANDS" = true ] && sudo sh -c 'pmset -a destroyfvkeyonstandby 1; pmset -a hibernatemode 25; pmset -a powernap 0; pmset -a standby 0; pmset -a standbydelay 0; pmset -a autopoweroff 0' || echo "EXECUTE_COMMANDS is set to false."
-end_command_output
-
 print_step "Enable firewall."
 print_command "sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate on"
 start_command_output
@@ -67,18 +35,6 @@ start_command_output
 [ "$EXECUTE_COMMANDS" = true ] && sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setstealthmode on || echo "EXECUTE_COMMANDS is set to false."
 end_command_output
 
-print_step "Don't allow signed built-in applications to run automatically."
-print_command "sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setallowsigned off"
-start_command_output
-[ "$EXECUTE_COMMANDS" = true ] && sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setallowsigned off || echo "EXECUTE_COMMANDS is set to false."
-end_command_output
-
-print_step "Don't allow signed downloaded applications to run automatically."
-print_command "sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setallowsignedapp off"
-start_command_output
-[ "$EXECUTE_COMMANDS" = true ] && sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setallowsignedapp off || echo "EXECUTE_COMMANDS is set to false."
-end_command_output
-
 print_step "Disable captive portal."
 print_command "sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.captive.control.plist Active -bool false"
 start_command_output
@@ -87,16 +43,88 @@ end_command_output
 
 print_header "SETUP ENVIRONMENT"
 
-print_step "Install XCode command line utilities."
-print_command "xcode-select --install"
-start_command_output
-[ "$EXECUTE_COMMANDS" = true ] && xcode-select --install || echo "EXECUTE_COMMANDS is set to false."
-end_command_output
-
 print_step "Install Homebrew."
 print_command '/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"'
 start_command_output
 [ "$EXECUTE_COMMANDS" = true ] && /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" || echo "EXECUTE_COMMANDS is set to false."
+end_command_output
+
+print_step "Always show hidden files in Finder."
+print_command "defaults write com.apple.finder AppleShowAllFiles YES" 
+start_command_output
+[ "$EXECUTE_COMMANDS" = true ] && defaults write com.apple.finder AppleShowAllFiles YES || echo "EXECUTE_COMMANDS is set to false."
+end_command_output
+
+print_step "Install ZSH."
+print_command "brew install zsh" 
+start_command_output
+[ "$EXECUTE_COMMANDS" = true ] && brew install zsh || echo "EXECUTE_COMMANDS is set to false."
+end_command_output
+
+print_step "Install Oh-My-Zsh."
+print_command 'sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"' 
+start_command_output
+[ "$EXECUTE_COMMANDS" = true ] && sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" || echo "EXECUTE_COMMANDS is set to false."
+end_command_output
+
+print_step "Install Oh-My-Zsh almostontop plugin."
+print_command "cd $HOME/.oh-my-zsh/custom/plugins && git clone https://github.com/Valiev/almostontop.git" 
+start_command_output
+[ "$EXECUTE_COMMANDS" = true ] && cd $HOME/.oh-my-zsh/custom/plugins && git clone https://github.com/Valiev/almostontop.git || echo "EXECUTE_COMMANDS is set to false."
+end_command_output
+
+print_step "Install Oh-My-Zsh zsh-notify plugin."
+print_command "cd $HOME/.oh-my-zsh/custom/plugins && git clone https://github.com/marzocchi/zsh-notify.git" 
+start_command_output
+[ "$EXECUTE_COMMANDS" = true ] && cd $HOME/.oh-my-zsh/custom/plugins && git clone https://github.com/marzocchi/zsh-notify.git || echo "EXECUTE_COMMANDS is set to false."
+end_command_output
+
+print_step "Install terminal-notifier for zsh-notify plugin."
+print_command "brew install terminal-notifier" 
+start_command_output
+[ "$EXECUTE_COMMANDS" = true ] && brew install terminal-notifier || echo "EXECUTE_COMMANDS is set to false."
+end_command_output
+
+print_step "Copy assets for zsh-notify."
+print_command "cp ./zsh-notify/*.png $HOME/.oh-my-zsh/custom/plugins/zsh-notify/" 
+start_command_output
+[ "$EXECUTE_COMMANDS" = true ] && cp ./zsh-notify/*.png $HOME/.oh-my-zsh/custom/plugins/zsh-notify/ || echo "EXECUTE_COMMANDS is set to false."
+end_command_output
+
+print_step "Install Oh-My-Zsh zsh-syntax-highlighting plugin."
+print_command "cd $HOME/.oh-my-zsh/custom/plugins && git clone https://github.com/zsh-users/zsh-syntax-highlighting.git" 
+start_command_output
+[ "$EXECUTE_COMMANDS" = true ] && cd $HOME/.oh-my-zsh/custom/plugins && git clone https://github.com/zsh-users/zsh-syntax-highlighting.git || echo "EXECUTE_COMMANDS is set to false."
+end_command_output
+
+print_step "Install Oh-My-Zsh zsh-autosuggestions plugin."
+print_command "cd $HOME/.oh-my-zsh/custom/plugins && git clone https://github.com/zsh-users/zsh-autosuggestions" 
+start_command_output
+[ "$EXECUTE_COMMANDS" = true ] && cd $HOME/.oh-my-zsh/custom/plugins && git clone https://github.com/zsh-users/zsh-autosuggestions || echo "EXECUTE_COMMANDS is set to false."
+end_command_output
+
+print_step "Install powerlevel9k."
+print_command "brew tap sambadevi/powerlevel9k && brew install powerlevel9k" 
+start_command_output
+[ "$EXECUTE_COMMANDS" = true ] && brew tap sambadevi/powerlevel9k && brew install powerlevel9k || echo "EXECUTE_COMMANDS is set to false."
+end_command_output
+
+print_step "Install nerd fonts."
+print_command "brew tap caskroom/fonts && brew cask install font-hack-nerd-font" 
+start_command_output
+[ "$EXECUTE_COMMANDS" = true ] && brew tap caskroom/fonts && brew cask install font-hack-nerd-font || echo "EXECUTE_COMMANDS is set to false."
+end_command_output
+
+print_step "Disable terminal login prompt."
+print_command "touch $HOME/.hushlogin" 
+start_command_output
+[ "$EXECUTE_COMMANDS" = true ] && touch $HOME/.hushlogin || echo "EXECUTE_COMMANDS is set to false."
+end_command_output
+
+print_step "Copy zshrc file."
+print_command "cp ./zsh/zshrc $HOME/.zshrc" 
+start_command_output
+[ "$EXECUTE_COMMANDS" = true ] && cp ./zsh/zshrc $HOME/.zshrc || echo "EXECUTE_COMMANDS is set to false."
 end_command_output
 
 print_footer "SETUP FINISHED"

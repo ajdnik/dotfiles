@@ -85,8 +85,8 @@ start_command_output
 [ "$EXECUTE_COMMANDS" = true ] && brew install terminal-notifier || echo "EXECUTE_COMMANDS is set to false."
 end_command_output
 
-print_step "Copy assets for zsh-notify."
-print_command "cp ./zsh-notify/*.png $HOME/.oh-my-zsh/custom/plugins/zsh-notify/" 
+print_step "Link assets for zsh-notify."
+print_command "ln -s ./zsh-notify/*.png $HOME/.oh-my-zsh/custom/plugins/zsh-notify/" 
 start_command_output
 [ "$EXECUTE_COMMANDS" = true ] && cp ./zsh-notify/*.png $HOME/.oh-my-zsh/custom/plugins/zsh-notify/ || echo "EXECUTE_COMMANDS is set to false."
 end_command_output
@@ -121,10 +121,76 @@ start_command_output
 [ "$EXECUTE_COMMANDS" = true ] && touch $HOME/.hushlogin || echo "EXECUTE_COMMANDS is set to false."
 end_command_output
 
-print_step "Copy zshrc file."
-print_command "cp ./zsh/zshrc $HOME/.zshrc" 
+print_step "Link zshrc file."
+print_command "ln -s ./zsh/zshrc $HOME/.zshrc" 
 start_command_output
 [ "$EXECUTE_COMMANDS" = true ] && cp ./zsh/zshrc $HOME/.zshrc || echo "EXECUTE_COMMANDS is set to false."
+end_command_output
+
+print_step "Setup iTerm2 custom preferences directory."
+print_command 'defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "~/Documents/Code/dotfiles/iterm"' 
+start_command_output
+[ "$EXECUTE_COMMANDS" = true ] && defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "~/Documents/Code/dotfiles/iterm" || echo "EXECUTE_COMMANDS is set to false."
+end_command_output
+
+print_step "Enable iTerm2 custom preferences directory."
+print_command "defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true" 
+start_command_output
+[ "$EXECUTE_COMMANDS" = true ] && defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true || echo "EXECUTE_COMMANDS is set to false."
+end_command_output
+
+print_step "Install neovim."
+print_command "brew istall neovim" 
+start_command_output
+[ "$EXECUTE_COMMANDS" = true ] && brew install neovim || echo "EXECUTE_COMMANDS is set to false."
+end_command_output
+
+print_step "Install Vundle."
+print_command "git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim" 
+start_command_output
+[ "$EXECUTE_COMMANDS" = true ] && git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim || echo "EXECUTE_COMMANDS is set to false."
+end_command_output
+
+print_step "Link init.vim file."
+print_command "mkdir -p ~/.config/nvim/ && ln -s ./vim/init.vim ~/.config/nvim/" 
+start_command_output
+[ "$EXECUTE_COMMANDS" = true ] && mkdir -p ~/.config/nvim/ && ln -s ./vim/init.vim ~/.config/nvim/ || echo "EXECUTE_COMMANDS is set to false."
+end_command_output
+
+print_step "Install neovim plugins."
+print_command "nvim +PluginInstall +qall" 
+start_command_output
+[ "$EXECUTE_COMMANDS" = true ] && nvim +PluginInstall +qall || echo "EXECUTE_COMMANDS is set to false."
+end_command_output
+
+print_step "Setup ssh keys."
+print_command "ssh-keygen -t rsa -N '' -f ~/.ssh/id_rsa && cat ~/.ssh/id_rsa.pub" 
+start_command_output
+[ "$EXECUTE_COMMANDS" = true ] && ssh-keygen -t rsa -N '' -f ~/.ssh/id_rsa && cat ~/.ssh/id_rsa.pub || echo "EXECUTE_COMMANDS is set to false."
+end_command_output
+
+print_step "Install gpg."
+print_command "brew install gpg" 
+start_command_output
+[ "$EXECUTE_COMMANDS" = true ] && brew install gpg || echo "EXECUTE_COMMANDS is set to false."
+end_command_output
+
+print_step "Setup gpg keys."
+print_command "gpg --batch --gen-key ./gpg/keygen" 
+start_command_output
+[ "$EXECUTE_COMMANDS" = true ] && gpg --batch --gen-key ./gpg/keygen || echo "EXECUTE_COMMANDS is set to false."
+end_command_output
+
+print_step "Print gpg keys."
+print_command "gpg --list-secret-keys --with-colons --keyid-format LONG | awk -F: '/^sec:/ { print $5 }' | gpg --armor --export --" 
+start_command_output
+[ "$EXECUTE_COMMANDS" = true ] && gpg --list-secret-keys --with-colons --keyid-format LONG | awk -F: '/^sec:/ { print $5 }' | gpg --armor --export -- || echo "EXECUTE_COMMANDS is set to false."
+end_command_output
+
+print_step "Link gitconfig file."
+print_command "ln -s ./git/gitconfig ~/.gitconfig" 
+start_command_output
+[ "$EXECUTE_COMMANDS" = true ] && ln -s ./git/gitconfig ~/.gitconfig || echo "EXECUTE_COMMANDS is set to false."
 end_command_output
 
 print_footer "SETUP FINISHED"

@@ -86,9 +86,9 @@ start_command_output
 end_command_output
 
 print_step "Link assets for zsh-notify."
-print_command "ln -s ./zsh-notify/*.png $HOME/.oh-my-zsh/custom/plugins/zsh-notify/" 
+print_command "ln -s ./zsh/zsh-notify/*.png $HOME/.oh-my-zsh/custom/plugins/zsh-notify/" 
 start_command_output
-[ "$EXECUTE_COMMANDS" = true ] && cp ./zsh-notify/*.png $HOME/.oh-my-zsh/custom/plugins/zsh-notify/ || echo "EXECUTE_COMMANDS is set to false."
+[ "$EXECUTE_COMMANDS" = true ] && cp ./zsh/zsh-notify/*.png $HOME/.oh-my-zsh/custom/plugins/zsh-notify/ || echo "EXECUTE_COMMANDS is set to false."
 end_command_output
 
 print_step "Install Oh-My-Zsh zsh-syntax-highlighting plugin."

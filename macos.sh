@@ -9,7 +9,7 @@
 source ./output.sh
 
 # If set to false no command will be executed. Acts like a dry run.
-EXECUTE_COMMANDS=false
+EXECUTE_COMMANDS=true
 
 #
 # SYSTEM HARDENING
@@ -68,15 +68,15 @@ start_command_output
 end_command_output
 
 print_step "Install Oh-My-Zsh almostontop plugin."
-print_command "cd $HOME/.oh-my-zsh/custom/plugins && git clone https://github.com/Valiev/almostontop.git" 
+print_command "cd ~/.oh-my-zsh/custom/plugins && git clone https://github.com/Valiev/almostontop.git" 
 start_command_output
-[ "$EXECUTE_COMMANDS" = true ] && cd $HOME/.oh-my-zsh/custom/plugins && git clone https://github.com/Valiev/almostontop.git || echo "EXECUTE_COMMANDS is set to false."
+[ "$EXECUTE_COMMANDS" = true ] && cd ~/.oh-my-zsh/custom/plugins && git clone https://github.com/Valiev/almostontop.git || echo "EXECUTE_COMMANDS is set to false."
 end_command_output
 
 print_step "Install Oh-My-Zsh zsh-notify plugin."
-print_command "cd $HOME/.oh-my-zsh/custom/plugins && git clone https://github.com/marzocchi/zsh-notify.git" 
+print_command "cd ~/.oh-my-zsh/custom/plugins && git clone https://github.com/marzocchi/zsh-notify.git" 
 start_command_output
-[ "$EXECUTE_COMMANDS" = true ] && cd $HOME/.oh-my-zsh/custom/plugins && git clone https://github.com/marzocchi/zsh-notify.git || echo "EXECUTE_COMMANDS is set to false."
+[ "$EXECUTE_COMMANDS" = true ] && cd ~/.oh-my-zsh/custom/plugins && git clone https://github.com/marzocchi/zsh-notify.git || echo "EXECUTE_COMMANDS is set to false."
 end_command_output
 
 print_step "Install terminal-notifier for zsh-notify plugin."
@@ -86,21 +86,21 @@ start_command_output
 end_command_output
 
 print_step "Link assets for zsh-notify."
-print_command "ln -s ./zsh/zsh-notify/*.png $HOME/.oh-my-zsh/custom/plugins/zsh-notify/" 
+print_command "ln -s $(pwd)/zsh/zsh-notify/*.png ~/.oh-my-zsh/custom/plugins/zsh-notify/" 
 start_command_output
-[ "$EXECUTE_COMMANDS" = true ] && cp ./zsh/zsh-notify/*.png $HOME/.oh-my-zsh/custom/plugins/zsh-notify/ || echo "EXECUTE_COMMANDS is set to false."
+[ "$EXECUTE_COMMANDS" = true ] && ln -s $(pwd)/zsh/zsh-notify/*.png ~/.oh-my-zsh/custom/plugins/zsh-notify/ || echo "EXECUTE_COMMANDS is set to false."
 end_command_output
 
 print_step "Install Oh-My-Zsh zsh-syntax-highlighting plugin."
-print_command "cd $HOME/.oh-my-zsh/custom/plugins && git clone https://github.com/zsh-users/zsh-syntax-highlighting.git" 
+print_command "cd ~/.oh-my-zsh/custom/plugins && git clone https://github.com/zsh-users/zsh-syntax-highlighting.git" 
 start_command_output
-[ "$EXECUTE_COMMANDS" = true ] && cd $HOME/.oh-my-zsh/custom/plugins && git clone https://github.com/zsh-users/zsh-syntax-highlighting.git || echo "EXECUTE_COMMANDS is set to false."
+[ "$EXECUTE_COMMANDS" = true ] && cd ~/.oh-my-zsh/custom/plugins && git clone https://github.com/zsh-users/zsh-syntax-highlighting.git || echo "EXECUTE_COMMANDS is set to false."
 end_command_output
 
 print_step "Install Oh-My-Zsh zsh-autosuggestions plugin."
-print_command "cd $HOME/.oh-my-zsh/custom/plugins && git clone https://github.com/zsh-users/zsh-autosuggestions" 
+print_command "cd ~/.oh-my-zsh/custom/plugins && git clone https://github.com/zsh-users/zsh-autosuggestions" 
 start_command_output
-[ "$EXECUTE_COMMANDS" = true ] && cd $HOME/.oh-my-zsh/custom/plugins && git clone https://github.com/zsh-users/zsh-autosuggestions || echo "EXECUTE_COMMANDS is set to false."
+[ "$EXECUTE_COMMANDS" = true ] && cd ~/.oh-my-zsh/custom/plugins && git clone https://github.com/zsh-users/zsh-autosuggestions || echo "EXECUTE_COMMANDS is set to false."
 end_command_output
 
 print_step "Install powerlevel9k."
@@ -116,21 +116,21 @@ start_command_output
 end_command_output
 
 print_step "Disable terminal login prompt."
-print_command "touch $HOME/.hushlogin" 
+print_command "touch ~/.hushlogin" 
 start_command_output
-[ "$EXECUTE_COMMANDS" = true ] && touch $HOME/.hushlogin || echo "EXECUTE_COMMANDS is set to false."
+[ "$EXECUTE_COMMANDS" = true ] && touch ~/.hushlogin || echo "EXECUTE_COMMANDS is set to false."
 end_command_output
 
 print_step "Link zshrc file."
-print_command "ln -s ./zsh/zshrc $HOME/.zshrc" 
+print_command "ln -s $(pwd)/zsh/zshrc ~/.zshrc" 
 start_command_output
-[ "$EXECUTE_COMMANDS" = true ] && cp ./zsh/zshrc $HOME/.zshrc || echo "EXECUTE_COMMANDS is set to false."
+[ "$EXECUTE_COMMANDS" = true ] && ln -s $(pwd)/zsh/zshrc ~/.zshrc || echo "EXECUTE_COMMANDS is set to false."
 end_command_output
 
 print_step "Setup iTerm2 custom preferences directory."
-print_command 'defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "~/Documents/Code/dotfiles/iterm"' 
+print_command 'defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "$(pwd)/iterm"' 
 start_command_output
-[ "$EXECUTE_COMMANDS" = true ] && defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "~/Documents/Code/dotfiles/iterm" || echo "EXECUTE_COMMANDS is set to false."
+[ "$EXECUTE_COMMANDS" = true ] && defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "$(pwd)/iterm" || echo "EXECUTE_COMMANDS is set to false."
 end_command_output
 
 print_step "Enable iTerm2 custom preferences directory."
@@ -152,21 +152,15 @@ start_command_output
 end_command_output
 
 print_step "Link init.vim file."
-print_command "mkdir -p ~/.config/nvim/ && ln -s ./vim/init.vim ~/.config/nvim/" 
+print_command "mkdir -p ~/.config/nvim/ && ln -s $(pwd)/vim/init.vim ~/.config/nvim/init.vim" 
 start_command_output
-[ "$EXECUTE_COMMANDS" = true ] && mkdir -p ~/.config/nvim/ && ln -s ./vim/init.vim ~/.config/nvim/ || echo "EXECUTE_COMMANDS is set to false."
+[ "$EXECUTE_COMMANDS" = true ] && mkdir -p ~/.config/nvim/ && ln -s $(pwd)/vim/init.vim ~/.config/nvim/init.vim || echo "EXECUTE_COMMANDS is set to false."
 end_command_output
 
 print_step "Install neovim plugins."
 print_command "nvim +PluginInstall +qall" 
 start_command_output
 [ "$EXECUTE_COMMANDS" = true ] && nvim +PluginInstall +qall || echo "EXECUTE_COMMANDS is set to false."
-end_command_output
-
-print_step "Setup ssh keys."
-print_command "ssh-keygen -t rsa -N '' -f ~/.ssh/id_rsa && cat ~/.ssh/id_rsa.pub" 
-start_command_output
-[ "$EXECUTE_COMMANDS" = true ] && ssh-keygen -t rsa -N '' -f ~/.ssh/id_rsa && cat ~/.ssh/id_rsa.pub || echo "EXECUTE_COMMANDS is set to false."
 end_command_output
 
 print_step "Install gpg."
@@ -187,10 +181,16 @@ start_command_output
 [ "$EXECUTE_COMMANDS" = true ] && gpg --list-secret-keys --with-colons --keyid-format LONG | awk -F: '/^sec:/ { print $5 }' | gpg --armor --export -- || echo "EXECUTE_COMMANDS is set to false."
 end_command_output
 
-print_step "Link gitconfig file."
-print_command "ln -s ./git/gitconfig ~/.gitconfig" 
+print_step "Remove old gitconfig file."
+print_command "rm ~/.gitconfig" 
 start_command_output
-[ "$EXECUTE_COMMANDS" = true ] && ln -s ./git/gitconfig ~/.gitconfig || echo "EXECUTE_COMMANDS is set to false."
+[ "$EXECUTE_COMMANDS" = true ] && rm ~/.gitconfig || echo "EXECUTE_COMMANDS is set to false."
+end_command_output
+
+print_step "Link gitconfig file."
+print_command "ln -s $(pwd)/git/gitconfig ~/.gitconfig" 
+start_command_output
+[ "$EXECUTE_COMMANDS" = true ] && ln -s $(pwd)/git/gitconfig ~/.gitconfig || echo "EXECUTE_COMMANDS is set to false."
 end_command_output
 
 print_footer "SETUP FINISHED"

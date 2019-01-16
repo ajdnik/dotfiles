@@ -193,4 +193,16 @@ start_command_output
 [ "$EXECUTE_COMMANDS" = true ] && ln -s $(pwd)/git/gitconfig ~/.gitconfig || echo "EXECUTE_COMMANDS is set to false."
 end_command_output
 
+print_step "Install go."
+print_command "brew install go" 
+start_command_output
+[ "$EXECUTE_COMMANDS" = true ] && brew install go || echo "EXECUTE_COMMANDS is set to false."
+end_command_output
+
+print_step "Create GOPATH directories."
+print_command "mkdir -p ~/Documents/Go/{bin,src,pkg}" 
+start_command_output
+[ "$EXECUTE_COMMANDS" = true ] && mkdir -p ~/Documents/Go/{bin,src,pkg} || echo "EXECUTE_COMMANDS is set to false."
+end_command_output
+
 print_footer "SETUP FINISHED"

@@ -14,8 +14,9 @@ ZSH_THEME="robbyrussell"
 source /usr/local/opt/powerlevel9k/powerlevel9k.zsh-theme
 # Configure powerlevel9k theme
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(os_icon dir dir_writable vcs)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status command_execution_time root_indicator background_jobs node_version)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status command_execution_time root_indicator background_jobs node_version go_version)
 POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
+POWERLEVEL9K_GO_VERSION_BACKGROUND='magenta'
 POWERLEVEL9K_COMMAND_EXECUTION_TIME_THRESHOLD=10
 POWERLEVEL9K_COMMAND_EXECUTION_TIME_PRECISION=2
 POWERLEVEL9K_MODE="nerdfont-complete"
@@ -56,3 +57,11 @@ source $ZSH/oh-my-zsh.sh
 # Disable Homebrew analytics
 export HOMEBREW_NO_ANALYTICS=1
 
+# NVM
+export NVM_DIR="$HOME/.nvm"
+[ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/usr/local/opt/nvm/etc/bash_completion" ] && . "/usr/local/opt/nvm/etc/bash_completion"  # This loads nvm bash_completion
+
+# GOLANG
+export GOPATH="$HOME/Documents/Go"
+# export PATH=$PATH:/usr/local/opt/go/libexec/bin

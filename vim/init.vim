@@ -11,14 +11,15 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
+" ----------------------------------------------------------------------------
+" GENERAL PLUGINS
+" ----------------------------------------------------------------------------
+
 " Full path fuzzy file, buffer, mru, tag, ... finder for Vim.
-" Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'ctrlpvim/ctrlp.vim'
 
 " A tree explorer plugin for vim.
 Plugin 'scrooloose/nerdtree'
-
-" Syntax file and other settings for TypeScript.
-Plugin 'leafgarland/typescript-Vim'
 
 " NERDTree and tabs together in Vim, painlessly.
 Plugin 'jistr/vim-nerdtree-tabs'
@@ -28,9 +29,6 @@ Plugin 'Xuyuanp/nerdtree-git-plugin'
 
 " A plugin for commenting
 Plugin 'scrooloose/nerdcommenter'
-
-" the best Git wrapper of all time
-" Plugin 'tpope/vim-fugitive'
 
 " status/tabline for vim
 Plugin 'bling/vim-airline'
@@ -45,6 +43,45 @@ Plugin 'arcticicestudio/nord-vim'
 " adds filetype glyphs (icons) to other plugins
 Plugin 'ryanoasis/vim-devicons'
 
+" Syntax checker
+Plugin 'scrooloose/syntastic'
+
+" Linting engine
+Plugin 'w0rp/ale'
+
+" Autocomplete
+Plugin 'shougo/deoplete.nvim'
+Plugin 'roxma/nvim-yarp'
+Plugin 'roxma/vim-hug-neovim-rpc'
+
+" ----------------------------------------------------------------------------
+" GOLANG PLUGINS
+" ----------------------------------------------------------------------------
+
+" Go language support
+Plugin 'fatih/vim-go'
+
+" Delve debug support
+Plugin 'sebdah/vim-delve'
+
+" ----------------------------------------------------------------------------
+" TYPESCRIPT PLUGINS
+" ----------------------------------------------------------------------------
+
+" Syntax file and other settings for TypeScript.
+Plugin 'leafgarland/typescript-Vim'
+
+" ----------------------------------------------------------------------------
+" CPP PLUGINS
+" ----------------------------------------------------------------------------
+
+" ----------------------------------------------------------------------------
+" MISC PLUGINS
+" ----------------------------------------------------------------------------
+
+" the best Git wrapper of all time
+" Plugin 'tpope/vim-fugitive'
+
 " used by google/maktaba
 " Plugin 'google/maktaba'
 
@@ -56,12 +93,6 @@ Plugin 'ryanoasis/vim-devicons'
 
 " Autocomplete plugin
 " Plugin 'Valloric/YouCompleteMe'
-
-" Go language support
-Plugin 'fatih/vim-go'
-
-" Syntax checker
-Plugin 'scrooloose/syntastic'
 
 " Syntax highlight for AppleScript
 Plugin 'applescript.vim'
@@ -103,9 +134,9 @@ let g:python3_host_prog = '/usr/local/bin/python3'
 " ----------------------------------------------------------------------------
 " ctrlpvim/ctrlp.vim PLUGIN
 " ----------------------------------------------------------------------------
-" let g:ctrlp_map = '<c-p>'			" default mapping
-" let g:ctrlp_cmd = 'CtrlP'			" default command
-" let g:ctrlp_working_path_mode = 'ra'		" starting directory
+let g:ctrlp_map = '<c-p>'			" default mapping
+let g:ctrlp_cmd = 'CtrlP'			" default command
+let g:ctrlp_working_path_mode = 'ra'		" starting directory
 
 " ----------------------------------------------------------------------------
 " scrooloose/nerdtree PLUGIN
@@ -202,7 +233,36 @@ let g:typescript_indent_disable = 1		" disable auto indent
 " ----------------------------------------------------------------------------
 " fatih/vim-go PLUGIN
 " ----------------------------------------------------------------------------
-"
+au FileType go set noexpandtab
+au FileType go set shiftwidth=4
+au FileType go set softtabstop=4
+au FileType go set tabstop=4
+
+let g:go_highlight_build_constraints = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_types = 1
+
+let g:go_auto_sameids = 1
+let g:go_fmt_command = "goimports"
+
+au FileType go nmap <leader>gt :GoDeclsDir<cr>
+au Filetype go nmap <leader>ga <Plug>(go-alternate-edit)
+au Filetype go nmap <leader>gah <Plug>(go-alternate-split)
+au Filetype go nmap <leader>gav <Plug>(go-alternate-vertical)
+au FileType go nmap <F10> :GoTest -short<cr>
+au FileType go nmap <F9> :GoCoverageToggle -short<cr>
+
+let g:go_auto_type_info = 1
+
+au FileType go nmap <F12> <Plug>(go-def)
+
+let g:go_addtags_transform = "snakecase"
+
 " ----------------------------------------------------------------------------
 " scrooloose/syntastic PLUGIN
 " ----------------------------------------------------------------------------
@@ -214,3 +274,20 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+
+" ----------------------------------------------------------------------------
+" w0rp/ale PLUGIN
+" ----------------------------------------------------------------------------
+" Error and warning signs.
+let g:ale_sign_error = '⤫'
+let g:ale_sign_warning = '⚠'
+" " Enable integration with airline.
+let g:airline#extensions#ale#enabled = 1
+
+" ----------------------------------------------------------------------------
+" shougo/deoplete.nvim PLUGIN
+" ----------------------------------------------------------------------------
+if has('nvim')
+	" Enable deoplete on startup
+  let g:deoplete#enable_at_startup = 1
+endif

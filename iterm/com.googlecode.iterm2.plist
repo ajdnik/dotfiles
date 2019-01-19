@@ -548,9 +548,9 @@
 	<key>NSWindow Frame NSFontPanel</key>
 	<string>205 199 996 501 0 0 1680 1027 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>4287 1079 796 486 3840 0 3840 2137 </string>
+	<string>713 847 796 486 0 0 3840 2137 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>913 1474 570 376 0 0 3840 2160 </string>
+	<string>311 232 2579 1790 0 0 3840 2137 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>474 387 570 376 0 0 1680 1027 </string>
 	<key>New Bookmarks</key>
@@ -803,7 +803,7 @@
 			<key>Blur</key>
 			<true/>
 			<key>Blur Radius</key>
-			<real>17.427266418147209</real>
+			<real>24.722624524111673</real>
 			<key>Bold Color</key>
 			<dict>
 				<key>Alpha Component</key>
@@ -869,7 +869,7 @@
 			<key>Custom Command</key>
 			<string>No</string>
 			<key>Custom Directory</key>
-			<string>No</string>
+			<string>Recycle</string>
 			<key>Default Bookmark</key>
 			<string>No</string>
 			<key>Description</key>
@@ -1278,7 +1278,7 @@
 			<key>Terminal Type</key>
 			<string>xterm-256color</string>
 			<key>Transparency</key>
-			<real>0.19810636104060914</real>
+			<real>0.047148635786802028</real>
 			<key>Unlimited Scrollback</key>
 			<true/>
 			<key>Use Bold Font</key>
@@ -1357,7 +1357,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2019-01-14T16:14:24Z</date>
+	<date>2019-01-17T14:47:44Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>ShowNewOutputIndicator</key>

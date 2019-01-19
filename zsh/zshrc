@@ -64,4 +64,5 @@ export NVM_DIR="$HOME/.nvm"
 
 # GOLANG
 export GOPATH="$HOME/Documents/Go"
+export PATH=$GOPATH/bin:$PATH
 # export PATH=$PATH:/usr/local/opt/go/libexec/bin

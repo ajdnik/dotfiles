@@ -127,6 +127,12 @@ start_command_output
 [ "$EXECUTE_COMMANDS" = true ] && ln -s $(pwd)/zsh/zshrc ~/.zshrc || echo "EXECUTE_COMMANDS is set to false."
 end_command_output
 
+print_step "Source zshrc file."
+print_command "source ~/.zshrc" 
+start_command_output
+[ "$EXECUTE_COMMANDS" = true ] && source ~/.zshrc || echo "EXECUTE_COMMANDS is set to false."
+end_command_output
+
 print_step "Setup iTerm2 custom preferences directory."
 print_command 'defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "$(pwd)/iterm"' 
 start_command_output
@@ -137,6 +143,18 @@ print_step "Enable iTerm2 custom preferences directory."
 print_command "defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true" 
 start_command_output
 [ "$EXECUTE_COMMANDS" = true ] && defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true || echo "EXECUTE_COMMANDS is set to false."
+end_command_output
+
+print_step "Install Python 2."
+print_command "brew install python@2" 
+start_command_output
+[ "$EXECUTE_COMMANDS" = true ] && brew install python@2 || echo "EXECUTE_COMMANDS is set to false."
+end_command_output
+
+print_step "Install Python 3."
+print_command "brew install python" 
+start_command_output
+[ "$EXECUTE_COMMANDS" = true ] && brew install python || echo "EXECUTE_COMMANDS is set to false."
 end_command_output
 
 print_step "Install neovim."
@@ -151,6 +169,12 @@ start_command_output
 [ "$EXECUTE_COMMANDS" = true ] && git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim || echo "EXECUTE_COMMANDS is set to false."
 end_command_output
 
+print_step "Install Python NVIM library."
+print_command "pip3 install pynvim" 
+start_command_output
+[ "$EXECUTE_COMMANDS" = true ] && pip3 install pynvim || echo "EXECUTE_COMMANDS is set to false."
+end_command_output
+
 print_step "Link init.vim file."
 print_command "mkdir -p ~/.config/nvim/ && ln -s $(pwd)/vim/init.vim ~/.config/nvim/init.vim" 
 start_command_output
@@ -158,7 +182,7 @@ start_command_output
 end_command_output
 
 print_step "Install neovim plugins."
-print_command "nvim +PluginInstall +qall" 
+print_command "nvim +PluginInstall +UpdateRemotePlugins +qall" 
 start_command_output
 [ "$EXECUTE_COMMANDS" = true ] && nvim +PluginInstall +qall || echo "EXECUTE_COMMANDS is set to false."
 end_command_output
@@ -203,6 +227,18 @@ print_step "Create GOPATH directories."
 print_command "mkdir -p ~/Documents/Go/{bin,src,pkg}" 
 start_command_output
 [ "$EXECUTE_COMMANDS" = true ] && mkdir -p ~/Documents/Go/{bin,src,pkg} || echo "EXECUTE_COMMANDS is set to false."
+end_command_output
+
+print_step "Install Delve."
+print_command "go get -u github.com/go-delve/delve/cmd/dlv" 
+start_command_output
+[ "$EXECUTE_COMMANDS" = true ] && go get -u github.com/go-delve/delve/cmd/dlv || echo "EXECUTE_COMMANDS is set to false."
+end_command_output
+
+print_step "Install Gocode."
+print_command "go get -u github.com/mdempsky/gocode" 
+start_command_output
+[ "$EXECUTE_COMMANDS" = true ] && go get -u github.com/mdempsky/gocode || echo "EXECUTE_COMMANDS is set to false."
 end_command_output
 
 print_footer "SETUP FINISHED"

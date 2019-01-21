@@ -182,9 +182,21 @@ start_command_output
 end_command_output
 
 print_step "Install neovim plugins."
-print_command "nvim +PluginInstall +UpdateRemotePlugins +qall" 
+print_command "nvim +PluginInstall +qall" 
 start_command_output
 [ "$EXECUTE_COMMANDS" = true ] && nvim +PluginInstall +qall || echo "EXECUTE_COMMANDS is set to false."
+end_command_output
+
+print_step "Update neovim remote plugins."
+print_command "nvim +UpdateRemotePlugins +qall" 
+start_command_output
+[ "$EXECUTE_COMMANDS" = true ] && nvim +UpdateRemotePlugins +qall || echo "EXECUTE_COMMANDS is set to false."
+end_command_output
+
+print_step "Install neovim go binaries."
+print_command "nvim +GoInstallBinaries +qall" 
+start_command_output
+[ "$EXECUTE_COMMANDS" = true ] && nvim +GoInstallBinaries +qall || echo "EXECUTE_COMMANDS is set to false."
 end_command_output
 
 print_step "Install gpg."
@@ -239,6 +251,12 @@ print_step "Install Gocode."
 print_command "go get -u github.com/mdempsky/gocode" 
 start_command_output
 [ "$EXECUTE_COMMANDS" = true ] && go get -u github.com/mdempsky/gocode || echo "EXECUTE_COMMANDS is set to false."
+end_command_output
+
+print_step "Compile deoplete-go dependencies."
+print_command "cd ~/.vim/bundle/deoplete-go && make" 
+start_command_output
+[ "$EXECUTE_COMMANDS" = true ] && cd ~/.vim/bundle/deoplete-go && make || echo "EXECUTE_COMMANDS is set to false."
 end_command_output
 
 print_footer "SETUP FINISHED"

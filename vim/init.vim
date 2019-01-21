@@ -64,6 +64,9 @@ Plugin 'fatih/vim-go'
 " Delve debug support
 Plugin 'sebdah/vim-delve'
 
+" Deoplete support for go
+Plugin 'zchee/deoplete-go'
+
 " ----------------------------------------------------------------------------
 " TYPESCRIPT PLUGINS
 " ----------------------------------------------------------------------------
@@ -257,7 +260,7 @@ au Filetype go nmap <leader>gav <Plug>(go-alternate-vertical)
 au FileType go nmap <F10> :GoTest -short<cr>
 au FileType go nmap <F9> :GoCoverageToggle -short<cr>
 
-let g:go_auto_type_info = 1
+" let g:go_auto_type_info = 1
 
 au FileType go nmap <F12> <Plug>(go-def)
 
@@ -291,3 +294,11 @@ if has('nvim')
 	" Enable deoplete on startup
   let g:deoplete#enable_at_startup = 1
 endif
+set completeopt-=preview
+
+" ----------------------------------------------------------------------------
+" sebdah/vim-delve PLUGIN
+" ----------------------------------------------------------------------------
+au FileType go nmap <leader>dtb :DlvToggleBreakpoint<cr>
+au FileType go nmap <leader>dt :DlvTest<cr>
+let g:delve_breakpoint_sign_highlight = 'ALEErrorSign'

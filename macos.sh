@@ -74,9 +74,9 @@ start_command_output
 end_command_output
 
 print_step "Install Oh-My-Zsh zsh-notify plugin."
-print_command "cd ~/.oh-my-zsh/custom/plugins && git clone https://github.com/marzocchi/zsh-notify.git" 
+print_command "cd ~/.oh-my-zsh/custom/plugins && git clone https://github.com/marzocchi/zsh-notify.git notify" 
 start_command_output
-[ "$EXECUTE_COMMANDS" = true ] && cd ~/.oh-my-zsh/custom/plugins && git clone https://github.com/marzocchi/zsh-notify.git || echo "EXECUTE_COMMANDS is set to false."
+[ "$EXECUTE_COMMANDS" = true ] && cd ~/.oh-my-zsh/custom/plugins && git clone https://github.com/marzocchi/zsh-notify.git notify || echo "EXECUTE_COMMANDS is set to false."
 end_command_output
 
 print_step "Install terminal-notifier for zsh-notify plugin."
@@ -86,9 +86,9 @@ start_command_output
 end_command_output
 
 print_step "Link assets for zsh-notify."
-print_command "ln -s $(pwd)/zsh/zsh-notify/*.png ~/.oh-my-zsh/custom/plugins/zsh-notify/" 
+print_command "ln -s $(pwd)/zsh/zsh-notify/*.png ~/.oh-my-zsh/custom/plugins/notify/" 
 start_command_output
-[ "$EXECUTE_COMMANDS" = true ] && ln -s $(pwd)/zsh/zsh-notify/*.png ~/.oh-my-zsh/custom/plugins/zsh-notify/ || echo "EXECUTE_COMMANDS is set to false."
+[ "$EXECUTE_COMMANDS" = true ] && ln -s $(pwd)/zsh/zsh-notify/*.png ~/.oh-my-zsh/custom/plugins/notify/ || echo "EXECUTE_COMMANDS is set to false."
 end_command_output
 
 print_step "Install Oh-My-Zsh zsh-syntax-highlighting plugin."

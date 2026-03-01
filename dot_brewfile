@@ -1,15 +1,23 @@
 # Manage your dotfiles across multiple diverse machines, securely
 brew "chezmoi"
+# Interact with Google Gemini AI models from the command-line
+brew "gemini-cli"
 # GNU Privacy Guard (OpenPGP)
 brew "gnupg"
 # Ambitious Vim-fork focused on extensibility and agility
 brew "neovim"
+# Manage multiple Node.js versions
+brew "nvm"
 # Search tool like grep and The Silver Searcher
 brew "ripgrep"
 # Cross-shell prompt for astronauts
 brew "starship"
 # Parser generator tool
 brew "tree-sitter-cli"
+# Fish-like fast/unobtrusive autosuggestions for zsh
+brew "zsh-autosuggestions"
+# Fish shell like syntax highlighting for zsh
+brew "zsh-syntax-highlighting"
 cask "font-jetbrains-mono-nerd-font"
 # Terminal emulator that uses platform-native UI and GPU acceleration
 cask "ghostty"

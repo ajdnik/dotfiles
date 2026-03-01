@@ -1,0 +1,7 @@
+[user]
+  email = r.ajdnik@gmail.com
+  name = Rok Ajdnik
+[gpg]
+  program = gpg
+[commit]
+  gpgsign = true

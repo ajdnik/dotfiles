@@ -1,6 +1,6 @@
 # dotfiles
 
-Repository containing configuration files to set up a MacOS system for my personal usage.
+Repository containing configuration files to set up a MacOS system for my personal usage. The repository uses [chezmoi](https://www.chezmoi.io/) to manage configuration files.
 
 # git
 

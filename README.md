@@ -18,5 +18,6 @@ gpg --list-secret-keys --with-colons --keyid-format LONG | awk -F: '/^sec:/ { pr
 # homebrew
 
 ```
+brew bundle dump --describe --force --file=~/.brewfile
 brew bundle --file=~/.brewfile
 ```

@@ -2,6 +2,8 @@
 brew "chezmoi"
 # GNU Privacy Guard (OpenPGP)
 brew "gnupg"
+# Ambitious Vim-fork focused on extensibility and agility
+brew "neovim"
 # Cross-shell prompt for astronauts
 brew "starship"
 cask "font-jetbrains-mono-nerd-font"

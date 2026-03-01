@@ -21,3 +21,5 @@ brew "zsh-syntax-highlighting"
 cask "font-jetbrains-mono-nerd-font"
 # Terminal emulator that uses platform-native UI and GPU acceleration
 cask "ghostty"
+# Text editor for code, markup and prose
+cask "sublime-text"

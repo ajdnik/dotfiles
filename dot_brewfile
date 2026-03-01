@@ -1,0 +1,9 @@
+# Manage your dotfiles across multiple diverse machines, securely
+brew "chezmoi"
+# GNU Privacy Guard (OpenPGP)
+brew "gnupg"
+# Cross-shell prompt for astronauts
+brew "starship"
+cask "font-jetbrains-mono-nerd-font"
+# Terminal emulator that uses platform-native UI and GPU acceleration
+cask "ghostty"
